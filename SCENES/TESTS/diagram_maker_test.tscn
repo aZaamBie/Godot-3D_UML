@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://t6vuyqvyg3nx"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
+[ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
+[ext_resource type="PackedScene" uid="uid://dmycuayhnjryn" path="res://SCENES/TOOLS/mouse_handle.tscn" id="2_x3l8d"]
+[ext_resource type="PackedScene" uid="uid://dkt6r7281cdqp" path="res://SCENES/TOOLS/camPivot.tscn" id="4_kf2te"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g2b5t"]
+sky_top_color = Color(0.721569, 0.815686, 0.92549, 1)
+sky_horizon_color = Color(0.584314, 0.682353, 0.780392, 1)
+ground_bottom_color = Color(0.623529, 0.705882, 0.8, 1)
+ground_horizon_color = Color(0.584314, 0.682353, 0.780392, 1)
+sun_angle_max = 252.22
+
+[sub_resource type="Sky" id="Sky_54jgf"]
+sky_material = SubResource("ProceduralSkyMaterial_g2b5t")
+
+[sub_resource type="Environment" id="Environment_58y4t"]
+background_mode = 2
+sky = SubResource("Sky_54jgf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6jht"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.2)
+albedo_texture = ExtResource("1_wkur2")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_upijq"]
+size = Vector3(50, 50, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hw3st"]
+data = PackedVector3Array(-25, 25, 0.25, 25, 25, 0.25, -25, -25, 0.25, 25, 25, 0.25, 25, -25, 0.25, -25, -25, 0.25, 25, 25, -0.25, -25, 25, -0.25, 25, -25, -0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, -0.25, 25, 25, 0.25, 25, 25, -0.25, 25, -25, 0.25, 25, 25, -0.25, 25, -25, -0.25, 25, -25, 0.25, -25, 25, -0.25, -25, 25, 0.25, -25, -25, -0.25, -25, 25, 0.25, -25, -25, 0.25, -25, -25, -0.25, 25, 25, 0.25, -25, 25, 0.25, 25, 25, -0.25, -25, 25, 0.25, -25, 25, -0.25, 25, 25, -0.25, -25, -25, 0.25, 25, -25, 0.25, -25, -25, -0.25, 25, -25, 0.25, 25, -25, -0.25, -25, -25, -0.25)
+
+[node name="diagramMaker_TEST" type="Node3D"]
+script = ExtResource("1_g3o73")
+
+[node name="mouseHandle" parent="." instance=ExtResource("2_x3l8d")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_58y4t")
+
+[node name="grid" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_v6jht")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_upijq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="grid"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="grid/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_hw3st")
+
+[node name="camPiv" parent="." instance=ExtResource("4_kf2te")]

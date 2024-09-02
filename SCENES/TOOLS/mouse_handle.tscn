@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmycuayhnjryn"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/mousePos_handle.gd" id="1_ndgwj"]
+
+[node name="mouseHandle" type="Node3D"]
+script = ExtResource("1_ndgwj")

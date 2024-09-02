@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkt6r7281cdqp"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/cameraManager.gd" id="1_efu25"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pspbr"]
+size = Vector3(0.2, 0.3, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h43jl"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x66sc"]
+top_radius = 0.01
+bottom_radius = 0.1
+height = 0.2
+radial_segments = 8
+
+[node name="camPiv" type="Node3D" node_paths=PackedStringArray("mainCam")]
+script = ExtResource("1_efu25")
+mainCam = NodePath("")
+axisLock = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 2)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]
+light_energy = 2.0
+omni_range = 10.0
+
+[node name="MESH" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.252696)
+
+[node name="mesh" type="MeshInstance3D" parent="Camera3D/MESH"]
+mesh = SubResource("BoxMesh_pspbr")
+skeleton = NodePath("../../..")
+
+[node name="mesh2" type="MeshInstance3D" parent="Camera3D/MESH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.211597, -0.13871)
+mesh = SubResource("SphereMesh_h43jl")
+skeleton = NodePath("../../..")
+
+[node name="mesh3" type="MeshInstance3D" parent="Camera3D/MESH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.176592, 0.0960903)
+mesh = SubResource("SphereMesh_h43jl")
+skeleton = NodePath("../../..")
+
+[node name="mesh4" type="MeshInstance3D" parent="Camera3D/MESH"]
+transform = Transform3D(-0.0988682, 4.34972e-08, -0.995101, 0.995101, 4.32166e-09, -0.0988682, 0, -1, -4.37114e-08, 0, 0, -0.312268)
+mesh = SubResource("CylinderMesh_x66sc")
+skeleton = NodePath("../../..")
