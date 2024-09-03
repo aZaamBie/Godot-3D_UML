@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=3 uid="uid://diqfdcmax7y4b"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/Panel_PropertiesManager.gd" id="1_db64r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eromc"]
+bg_color = Color(0.231373, 0.231373, 0.231373, 0.662745)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbwx6"]
+bg_color = Color(0.105882, 0, 0.388235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_6djwh"]
+color = Color(0.0941176, 0, 0.345098, 1)
+thickness = 3
+
+[node name="pnlProperties" type="Panel"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -140.0
+offset_bottom = 140.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eromc")
+script = ExtResource("1_db64r")
+
+[node name="lblTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bbwx6")
+text = "Properties:"
+horizontal_alignment = 1
+
+[node name="vboxProp" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00666667
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+metadata/_edit_use_anchors_ = true
+
+[node name="lblScale" type="Label" parent="vboxProp"]
+layout_mode = 2
+text = "Scale:"
+
+[node name="slid_x" type="HSlider" parent="vboxProp/lblScale"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.79999
+offset_top = 33.0
+offset_right = 80.8
+offset_bottom = 49.0
+grow_vertical = 0
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="slid_y" type="VSlider" parent="vboxProp/lblScale"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.642
+anchor_top = 0.652
+anchor_right = 0.642
+anchor_bottom = 0.652
+offset_left = -26.476
+offset_top = 0.00399971
+offset_right = 26.524
+offset_bottom = 55.004
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="lblColour" type="Label" parent="vboxProp"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_6djwh")
+text = "Colour:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="vboxProp/lblColour"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 109.0
+offset_bottom = 48.0
+grow_vertical = 0
+
+[node name="lblColour2" type="Label" parent="vboxProp"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_6djwh")
+text = "Colour:"
+
+[connection signal="value_changed" from="vboxProp/lblScale/slid_x" to="." method="_on_slid_x_value_changed"]
+[connection signal="value_changed" from="vboxProp/lblScale/slid_y" to="." method="_on_slid_y_value_changed"]
+[connection signal="color_changed" from="vboxProp/lblColour/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
