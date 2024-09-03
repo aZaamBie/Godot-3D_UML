@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2jx6lf3rf62q"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/Panel_Selector.gd" id="1_v0mp7"]
+[ext_resource type="Texture2D" uid="uid://cqb4uaxs2ukeb" path="res://ASSETS/icons/icon_Arrange-Move__rotated.png" id="1_v1fq7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0630k"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[node name="pnlSelector" type="Panel"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -69.0
+offset_right = 260.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0630k")
+script = ExtResource("1_v0mp7")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="btnSelect" type="Button" parent="hbox"]
+layout_mode = 2
+icon = ExtResource("1_v1fq7")
+
+[node name="OptionButton" type="OptionButton" parent="hbox"]
+layout_mode = 2
+item_count = 2
+allow_reselect = true
+popup/item_0/text = "Rectangle"
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/id = 1
+
+[node name="lbl" type="Label" parent="hbox/OptionButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.996078, 0.435294, 1)
+text = "SHAPES:"
+
+[node name="btnShape" type="Button" parent="hbox"]
+visible = false
+layout_mode = 2
+text = "Shape"
+
+[node name="btnAdd" type="Button" parent="hbox"]
+layout_mode = 2
+text = "LINES"
+
+[node name="btnAdd2" type="Button" parent="hbox"]
+layout_mode = 2
+text = "TEXT"
+
+[connection signal="pressed" from="hbox/btnSelect" to="." method="_on_btn_select_pressed"]
+[connection signal="item_selected" from="hbox/OptionButton" to="." method="_on_option_button_item_selected"]

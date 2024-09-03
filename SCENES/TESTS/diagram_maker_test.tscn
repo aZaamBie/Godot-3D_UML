@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://t6vuyqvyg3nx"]
+[gd_scene load_steps=13 format=3 uid="uid://t6vuyqvyg3nx"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
 [ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
 [ext_resource type="PackedScene" uid="uid://dmycuayhnjryn" path="res://SCENES/TOOLS/mouse_handle.tscn" id="2_x3l8d"]
 [ext_resource type="PackedScene" uid="uid://dkt6r7281cdqp" path="res://SCENES/TOOLS/camPivot.tscn" id="4_kf2te"]
-[ext_resource type="Texture2D" uid="uid://cqb4uaxs2ukeb" path="res://ASSETS/icons/icon_Arrange-Move__rotated.png" id="5_pwb82"]
+[ext_resource type="PackedScene" uid="uid://b2jx6lf3rf62q" path="res://SCENES/TOOLS/Panel_Selector.tscn" id="5_gkffh"]
 [ext_resource type="PackedScene" uid="uid://diqfdcmax7y4b" path="res://SCRIPTS/TOOLS/Panel_PropertiesManager.tscn" id="6_kwf28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g2b5t"]
@@ -33,24 +33,13 @@ size = Vector3(50, 50, 0.5)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hw3st"]
 data = PackedVector3Array(-25, 25, 0.25, 25, 25, 0.25, -25, -25, 0.25, 25, 25, 0.25, 25, -25, 0.25, -25, -25, 0.25, 25, 25, -0.25, -25, 25, -0.25, 25, -25, -0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, -0.25, 25, 25, 0.25, 25, 25, -0.25, 25, -25, 0.25, 25, 25, -0.25, 25, -25, -0.25, 25, -25, 0.25, -25, 25, -0.25, -25, 25, 0.25, -25, -25, -0.25, -25, 25, 0.25, -25, -25, 0.25, -25, -25, -0.25, 25, 25, 0.25, -25, 25, 0.25, 25, 25, -0.25, -25, 25, 0.25, -25, 25, -0.25, 25, 25, -0.25, -25, -25, 0.25, 25, -25, 0.25, -25, -25, -0.25, 25, -25, 0.25, 25, -25, -0.25, -25, -25, -0.25)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0630k"]
-bg_color = Color(0.184314, 0.184314, 0.184314, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
-
 [node name="diagramMaker_TEST" type="Node3D"]
 script = ExtResource("1_g3o73")
 
-[node name="mouseHandle" parent="." instance=ExtResource("2_x3l8d")]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_58y4t")
+
+[node name="OBJ" type="Node3D" parent="."]
 
 [node name="grid" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_v6jht")
@@ -64,6 +53,8 @@ shape = SubResource("ConcavePolygonShape3D_hw3st")
 
 [node name="camPiv" parent="." node_paths=PackedStringArray("mainCam") instance=ExtResource("4_kf2te")]
 mainCam = NodePath("Camera3D")
+
+[node name="mouseHandle" parent="camPiv" instance=ExtResource("2_x3l8d")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -81,62 +72,12 @@ anchor_right = 1.0
 offset_bottom = 56.0
 grow_horizontal = 2
 
-[node name="pnlSelector" type="Panel" parent="UI"]
+[node name="pnlSelector" parent="UI" instance=ExtResource("5_gkffh")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -260.0
-offset_top = -69.0
-offset_right = 260.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_0630k")
-
-[node name="hbox" type="HBoxContainer" parent="UI/pnlSelector"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="btnSelect" type="Button" parent="UI/pnlSelector/hbox"]
-layout_mode = 2
-icon = ExtResource("5_pwb82")
-
-[node name="OptionButton" type="OptionButton" parent="UI/pnlSelector/hbox"]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = ""
-popup/item_0/id = 0
-popup/item_1/text = ""
-popup/item_1/id = 1
-
-[node name="btnAdd" type="Button" parent="UI/pnlSelector/hbox"]
-visible = false
-layout_mode = 2
-text = "SELECT"
-
-[node name="GridContainer" type="GridContainer" parent="UI"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -11.0
-offset_right = -82.0
-offset_bottom = -11.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 3
 
 [node name="pnlProperties" parent="UI" instance=ExtResource("6_kwf28")]
 layout_mode = 1
 
 [editable path="camPiv"]
+[editable path="UI/pnlSelector"]
 [editable path="UI/pnlProperties"]

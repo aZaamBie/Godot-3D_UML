@@ -1,5 +1,7 @@
 extends Node3D
 
+# https://www.youtube.com/watch?v=mJRDyXsxT9g
+
 # CAMERA ROTATION
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.125

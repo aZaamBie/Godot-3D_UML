@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmycuayhnjryn"]
+[gd_scene load_steps=3 format=3 uid="uid://dmycuayhnjryn"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/mousePos_handle.gd" id="1_ndgwj"]
 
+[sub_resource type="PrismMesh" id="PrismMesh_0dlcb"]
+
 [node name="mouseHandle" type="Node3D"]
 script = ExtResource("1_ndgwj")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0518189, 0)
+billboard = 1
+text = "."
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PrismMesh_0dlcb")
