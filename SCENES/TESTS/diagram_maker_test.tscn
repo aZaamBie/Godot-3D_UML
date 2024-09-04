@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://t6vuyqvyg3nx"]
+[gd_scene load_steps=15 format=3 uid="uid://t6vuyqvyg3nx"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
 [ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
 [ext_resource type="PackedScene" uid="uid://dmycuayhnjryn" path="res://SCENES/TOOLS/mouse_handle.tscn" id="2_x3l8d"]
 [ext_resource type="PackedScene" uid="uid://dkt6r7281cdqp" path="res://SCENES/TOOLS/camPivot.tscn" id="4_kf2te"]
 [ext_resource type="PackedScene" uid="uid://b2jx6lf3rf62q" path="res://SCENES/TOOLS/Panel_Selector.tscn" id="5_gkffh"]
+[ext_resource type="Script" path="res://SCRIPTS/UI/UI_manager.gd" id="5_kr62m"]
 [ext_resource type="PackedScene" uid="uid://diqfdcmax7y4b" path="res://SCRIPTS/TOOLS/Panel_PropertiesManager.tscn" id="6_kwf28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g2b5t"]
@@ -67,13 +68,15 @@ zoomLabel = NodePath("../UI/lblZoom")
 
 [node name="mouseHandle" parent="camPiv" instance=ExtResource("2_x3l8d")]
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("properties_")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_kr62m")
+properties_ = NodePath("pnlProperties")
 
 [node name="pnl_top" type="Panel" parent="UI"]
 visible = false

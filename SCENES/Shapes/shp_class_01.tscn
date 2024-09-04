@@ -121,9 +121,8 @@ shape = SubResource("ConvexPolygonShape3D_u2jvl")
 shape = SubResource("ConvexPolygonShape3D_hnhkw")
 
 [node name="detectTitle" type="Area3D" parent="." groups=["editable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726155, 0)
-collision_layer = 2
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726155, -0.100126)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detectTitle"]
 transform = Transform3D(1.165, 0, 0, 0, 1.165, 0, 0, 0, 1.165, 0, 0, 0)
@@ -136,4 +135,4 @@ libraries = {
 autoplay = "loadIN"
 
 [connection signal="body_entered" from="detectTitle" to="." method="_on_detect_title_body_entered"]
-[connection signal="input_event" from="detectTitle" to="." method="_on_detect_title_input_event"]
+[connection signal="mouse_entered" from="detectTitle" to="." method="_on_detect_title_mouse_entered"]

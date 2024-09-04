@@ -14,22 +14,11 @@ func _process(delta):
 func _on_detect_title_mouse_entered():
 	pass # Replace with function body.
 	print("mouse entered")
-	$UI/LineEdit.show()
-
-
-
+	#$UI/LineEdit.show()
 func _on_detect_title_mouse_exited():
 	pass # Replace with function body.
 	print("mouse left")
 	$UI/LineEdit.hide()
-
-
-func _on_detect_title_input_event(camera, event, position, normal, shape_idx):
-	pass # Replace with function body.
-	if event is InputEventKey:
-		pass
-		print("key pressed")
-
 
 func _on_detect_title_body_entered(body):
 	pass # Replace with function body.

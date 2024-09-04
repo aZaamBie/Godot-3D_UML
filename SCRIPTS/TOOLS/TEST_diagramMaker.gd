@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var mousePos = $mouseHandle
+@onready var mousePos = $camPiv/mouseHandle
 
 var mode_
 

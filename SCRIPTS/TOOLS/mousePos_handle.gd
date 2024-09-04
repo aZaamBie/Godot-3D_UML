@@ -13,6 +13,8 @@ var screenPos_3D : Vector3 # mouse position in the 3D environment (Vector 3)
 var rayArray
 var rayCollider
 
+var toggle : bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,20 +44,19 @@ func _input(event):
 			tgtPos.z = 0.5
 			#tgtPos = global_position
 			#print(screenPos, " and ", screenPos_3D)
-			print(tgtPos, " is the target position")
-			#user_.spawnShape("rect", tgtPos) #o.g.
+			#print(tgtPos, " is the target position")
 			
-			if user_.mode_==0: 
-				pass
-				user_.toggleGrab()
-				user_.setNewObject(targetObj)
+			## grabbing objects
+			if user_.mode_==0: # ensure correct mode
+				user_.toggleGrab() # toggle the grab state
+				if targetObj!= null: user_.setNewObject(targetObj) # set the object to-be-grabbed for the user
+			## spawning objects
 			elif user_.mode_==1: # spawn shape
-				pass
 				user_.spawnShape("rect", tgtPos)
 		
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			pass
-			print(castRay())
+			print(castRay()["collider"])
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,18 +103,20 @@ func castRay():
 func _on_mouse_area_lmb_body_entered(body):
 	if body.is_in_group("object3D"):
 		targetObj = body
-		print("entered object 3D")
+		#print("entered object 3D")
+	elif body.is_in_group("editable"):
+		print("entered edtiable")
 func _on_mouse_area_lmb_body_exited(body):
 	if body.is_in_group("object3D"):
 		targetObj = null
-		print("entered object 3D")
+		#print("exited object 3D")
 
 ## RMB
 
 
 func _on_mouse_area_rmb_body_entered(body):
 	pass # Replace with function body.
-	if body.is_in_group("editable"):
-		print("entered edtiable")
+	#if body.is_in_group("editable"):
+		#print("entered edtiable")
 func _on_mouse_area_rmb_body_exited(body):
 	pass # Replace with function body.
