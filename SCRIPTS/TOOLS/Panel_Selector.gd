@@ -32,6 +32,6 @@ func _on_btn_select_pressed():
 
 
 func _on_option_button_item_selected(index):
-	pass # Replace with function body.
+	user_.shape_ = index
 	currentMode = Modes.SHAPE
 	updateUserMode()

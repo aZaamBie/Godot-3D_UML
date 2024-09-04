@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://i6sxpbufw58r"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/shp_class_01.gd" id="1_3n3hm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdjq1"]
+albedo_color = Color(0.529412, 0.454902, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f50je"]
+size = Vector3(2, 0.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tr68t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_np01x"]
+size = Vector3(2, 1, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yi24"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u2jvl"]
+points = PackedVector3Array(1, 0.25, 0.1, 1, 0.25, -0.1, -1, 0.25, 0.1, 1, -0.25, 0.1, 1, -0.25, -0.1, -1, 0.25, -0.1, -1, -0.25, 0.1, -1, -0.25, -0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hnhkw"]
+points = PackedVector3Array(1, 0.5, 0.1, 1, 0.5, -0.1, -1, 0.5, 0.1, 1, -0.5, 0.1, 1, -0.5, -0.1, -1, 0.5, -0.1, -1, -0.5, 0.1, -1, -0.5, -0.1)
+
+[sub_resource type="Animation" id="Animation_g5q24"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kriht"]
+resource_name = "loadIN"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtnh4"]
+_data = {
+"RESET": SubResource("Animation_g5q24"),
+"loadIN": SubResource("Animation_kriht")
+}
+
+[node name="shp_Class" type="StaticBody3D" groups=["shpCLASS", "template"]]
+script = ExtResource("1_3n3hm")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 434.5
+offset_top = 243.5
+offset_right = 677.5
+offset_bottom = 364.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter text:"
+
+[node name="lblTitle" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+billboard = 2
+no_depth_test = true
+text = "Title:"
+
+[node name="lblAtr" type="Label3D" parent="."]
+billboard = 2
+no_depth_test = true
+text = "- attribute01
+- attribute02
+- attribute03"
+
+[node name="title" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_jdjq1")
+mesh = SubResource("BoxMesh_f50je")
+skeleton = NodePath("")
+
+[node name="bodyAtr" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_tr68t")
+mesh = SubResource("BoxMesh_np01x")
+skeleton = NodePath("")
+
+[node name="bodyMethods" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_6yi24")
+mesh = SubResource("BoxMesh_np01x")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("ConvexPolygonShape3D_u2jvl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_hnhkw")
+
+[node name="detectTitle" type="Area3D" parent="." groups=["editable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726155, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detectTitle"]
+transform = Transform3D(1.165, 0, 0, 0, 1.165, 0, 0, 0, 1.165, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_u2jvl")
+
+[node name="animP" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qtnh4")
+}
+autoplay = "loadIN"
+
+[connection signal="body_entered" from="detectTitle" to="." method="_on_detect_title_body_entered"]
+[connection signal="input_event" from="detectTitle" to="." method="_on_detect_title_input_event"]

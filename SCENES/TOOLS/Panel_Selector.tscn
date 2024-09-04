@@ -47,7 +47,7 @@ item_count = 2
 allow_reselect = true
 popup/item_0/text = "Rectangle"
 popup/item_0/id = 0
-popup/item_1/text = ""
+popup/item_1/text = "Class 1"
 popup/item_1/id = 1
 
 [node name="lbl" type="Label" parent="hbox/OptionButton"]

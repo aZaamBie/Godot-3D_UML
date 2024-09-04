@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t6vuyqvyg3nx"]
+[gd_scene load_steps=14 format=3 uid="uid://t6vuyqvyg3nx"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
 [ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
@@ -33,6 +33,16 @@ size = Vector3(50, 50, 0.5)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hw3st"]
 data = PackedVector3Array(-25, 25, 0.25, 25, 25, 0.25, -25, -25, 0.25, 25, 25, 0.25, 25, -25, 0.25, -25, -25, 0.25, 25, 25, -0.25, -25, 25, -0.25, 25, -25, -0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, -0.25, 25, 25, 0.25, 25, 25, -0.25, 25, -25, 0.25, 25, 25, -0.25, 25, -25, -0.25, 25, -25, 0.25, -25, 25, -0.25, -25, 25, 0.25, -25, -25, -0.25, -25, 25, 0.25, -25, -25, 0.25, -25, -25, -0.25, 25, 25, 0.25, -25, 25, 0.25, 25, 25, -0.25, -25, 25, 0.25, -25, 25, -0.25, 25, 25, -0.25, -25, -25, 0.25, 25, -25, 0.25, -25, -25, -0.25, 25, -25, 0.25, 25, -25, -0.25, -25, -25, -0.25)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rex76"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+shadow_size = 5
+shadow_offset = Vector2(3.075, -2.135)
+
 [node name="diagramMaker_TEST" type="Node3D"]
 script = ExtResource("1_g3o73")
 
@@ -51,8 +61,9 @@ mesh = SubResource("BoxMesh_upijq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="grid/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_hw3st")
 
-[node name="camPiv" parent="." node_paths=PackedStringArray("mainCam") instance=ExtResource("4_kf2te")]
+[node name="camPiv" parent="." node_paths=PackedStringArray("mainCam", "zoomLabel") instance=ExtResource("4_kf2te")]
 mainCam = NodePath("Camera3D")
+zoomLabel = NodePath("../UI/lblZoom")
 
 [node name="mouseHandle" parent="camPiv" instance=ExtResource("2_x3l8d")]
 
@@ -77,6 +88,20 @@ layout_mode = 1
 
 [node name="pnlProperties" parent="UI" instance=ExtResource("6_kwf28")]
 layout_mode = 1
+
+[node name="lblZoom" type="Label" parent="UI"]
+modulate = Color(1, 1, 1, 0.576471)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = -2.0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rex76")
+text = "zoom: 100%"
 
 [editable path="camPiv"]
 [editable path="UI/pnlSelector"]

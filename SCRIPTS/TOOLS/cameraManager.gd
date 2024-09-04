@@ -15,8 +15,10 @@ var camera_distance = 2.0
 @export var axisLock : bool = false
 @export var orbit_enabled : bool = false
 @export_node_path var orbitTarget
+@export var zoomLabel : Label
 
 @export var moveSpeed : float = 0.1
+var zoom : float = 1.0
 @export var startPos : Vector3
 
 var myDelta
@@ -34,10 +36,12 @@ func _input(event):
 		mainCam.global_position.z -= 0.1
 		#self.global_position.z -= 0.1
 		moveSpeed -= 0.05 # adjust: decrease move speed when zooming in
+		#zoom -= 0.02
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN): 
 		mainCam.global_position.z += 0.1
 		#self.global_position.z += 0.1
 		moveSpeed += 0.05 # adjust: increase move speed when zooming out
+		#zoom += 0.02
 	
 	## ORBITTING
 	if orbit_enabled:
@@ -70,6 +74,10 @@ func _input(event):
 func _process(delta):
 	pass
 	myDelta = delta
+	
+	zoom = mainCam.global_position.z / 4
+	#zoomLabel.text = String("Zoom: {value}.2f%").format({"value": zoom*100})
+	zoomLabel.text = "Zoom: %.2f" % [zoom*100] + "%"
 	
 	self.global_position.z = clamp(mainCam.global_position.z,0.0,2)
 

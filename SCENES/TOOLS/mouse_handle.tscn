@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmycuayhnjryn"]
+[gd_scene load_steps=4 format=3 uid="uid://dmycuayhnjryn"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/mousePos_handle.gd" id="1_ndgwj"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_0dlcb"]
+[sub_resource type="SphereMesh" id="SphereMesh_if11d"]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3sjer"]
+radius = 0.4
 
 [node name="mouseHandle" type="Node3D"]
 script = ExtResource("1_ndgwj")
@@ -10,8 +15,33 @@ script = ExtResource("1_ndgwj")
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0518189, 0)
 billboard = 1
+no_depth_test = true
 text = "."
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="mouseAreaLMB" type="Area3D" parent="."]
+
+[node name="mouseMesh" type="MeshInstance3D" parent="mouseAreaLMB"]
 visible = false
-mesh = SubResource("PrismMesh_0dlcb")
+mesh = SubResource("SphereMesh_if11d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mouseAreaLMB"]
+shape = SubResource("SphereShape3D_3sjer")
+
+[node name="mouseAreaRMB" type="Area3D" parent="." groups=["mouse"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00420648, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="mouseMesh" type="MeshInstance3D" parent="mouseAreaRMB"]
+visible = false
+mesh = SubResource("SphereMesh_if11d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mouseAreaRMB"]
+shape = SubResource("SphereShape3D_3sjer")
+
+[connection signal="body_entered" from="mouseAreaLMB" to="." method="_on_mouse_area_lmb_body_entered"]
+[connection signal="body_exited" from="mouseAreaLMB" to="." method="_on_mouse_area_lmb_body_exited"]
+[connection signal="body_entered" from="mouseAreaRMB" to="." method="_on_mouse_area_rmb_body_entered"]
+[connection signal="body_exited" from="mouseAreaRMB" to="." method="_on_mouse_area_rmb_body_exited"]

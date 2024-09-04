@@ -4,9 +4,13 @@ extends Node3D
 
 var mode_
 
-
+var grabbingObject : bool = false
 var selectedObject
+
+var shape_ : int = 0
 var shpRectangle = preload("res://SCENES/Shapes/shp_rectangle.tscn")
+
+var mousePos3D : Vector3
 
 
 func _ready():
@@ -16,19 +20,42 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	if grabbingObject and selectedObject!=null:
+		pass
+		selectedObject.global_transform.origin = mousePos3D
+		selectedObject.position.z = 0.5
+	else:
+		pass
+		
+
+func toggleGrab():
+	if !grabbingObject:
+		selectedObject = null
+	
+	grabbingObject = !grabbingObject
+	print("grab toggled, status: " + str(grabbingObject) )
+func grabObject():
+	pass
+func setNewObject(newObj):
+	pass
+	selectedObject = newObj
+
 
 func spawnShape(shp_, pos:Vector3):
 	pass
 	await get_tree().create_timer(0.1).timeout # 0.1
 	if mode_==1: ## if the current mode is the "add shape" mode, then proceed
 		pass
-		match shp_:
+		print(shape_, " is shape")
+		match shape_: # shp_
 			0:
 				pass
 				var rect = preload("res://SCENES/Shapes/shp_rectangle.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 				selectedObject = rect
 			1:
 				pass
+				var class01 = preload("res://SCENES/Shapes/shp_class_01.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+				selectedObject = class01
 			_:
 				pass
 				var rect = preload("res://SCENES/Shapes/shp_rectangle.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
