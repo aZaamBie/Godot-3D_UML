@@ -18,10 +18,9 @@ var toggle : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
 	user_ = get_tree().current_scene
 	cam_ = get_tree().get_root().get_camera_3d()
-	print(cam_)
+	#print(cam_)
 
 func _input(event):
 	pass
@@ -37,6 +36,7 @@ func _input(event):
 			pass
 			mainPos3D = castRay()["position"]
 	
+	## LEFT MOUSE
 	if event is InputEventMouseButton and event.is_pressed(): # detect mouse buttons
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var tgtPos
@@ -52,10 +52,18 @@ func _input(event):
 				if targetObj!= null: user_.setNewObject(targetObj) # set the object to-be-grabbed for the user
 			## spawning objects
 			elif user_.mode_==1: # spawn shape
+				#user_.disableGrab() ## MAKE SURE TO DISABLE THE GRAB
 				user_.spawnShape("rect", tgtPos)
 		
+		## RIGHT MOUSE
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			pass
+			user_.disableGrab() ## MAKE SURE TO DISABLE THE GRAB
+			
+			if targetObj!= null: user_.setNewObject(targetObj)
+			
+			if user_.inpectingProperties == false: user_.openPanel_()
+			else: user_.closePanel_()
+			
 			print(castRay()["collider"])
 	
 
@@ -116,7 +124,7 @@ func _on_mouse_area_lmb_body_exited(body):
 
 func _on_mouse_area_rmb_body_entered(body):
 	pass # Replace with function body.
-	#if body.is_in_group("editable"):
-		#print("entered edtiable")
+	if body.is_in_group("editable"):
+		print("entered edtiable")
 func _on_mouse_area_rmb_body_exited(body):
 	pass # Replace with function body.

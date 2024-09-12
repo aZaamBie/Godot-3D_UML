@@ -12,7 +12,8 @@ func _ready():
 func _process(delta):
 	pass
 
-func openProperties():
+func openProperties(object=null):
+	properties_.open_(object)
 	properties_.show()
 func closeProperties():
 	properties_.hide()

@@ -23,8 +23,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -180.0
-offset_top = -140.0
-offset_bottom = 140.0
+offset_top = -160.0
+offset_bottom = 160.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eromc")
@@ -43,10 +43,12 @@ horizontal_alignment = 1
 [node name="vboxProp" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.00666667
+anchor_left = 0.00555549
 anchor_top = 0.1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.765625
+offset_left = 1.15633e-05
+offset_right = 1.52588e-05
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
@@ -103,11 +105,59 @@ offset_right = 109.0
 offset_bottom = 48.0
 grow_vertical = 0
 
-[node name="lblColour2" type="Label" parent="vboxProp"]
+[node name="txtBtn" type="Button" parent="vboxProp"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxLine_6djwh")
-text = "Colour:"
+text = "Edit text"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -140.0
+offset_right = 87.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Title" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="titleEdit" type="TextEdit" parent="TabContainer/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter title"
+
+[node name="Attributes" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="atrEdit" type="TextEdit" parent="TabContainer/Attributes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter Attributes:"
+
+[node name="Methods" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
 
 [connection signal="value_changed" from="vboxProp/lblScale/slid_x" to="." method="_on_slid_x_value_changed"]
 [connection signal="value_changed" from="vboxProp/lblScale/slid_y" to="." method="_on_slid_y_value_changed"]
 [connection signal="color_changed" from="vboxProp/lblColour/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="mouse_entered" from="vboxProp/txtBtn" to="." method="_on_txt_btn_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer" to="." method="_on_tab_container_mouse_exited"]
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="text_changed" from="TabContainer/Title/titleEdit" to="." method="_on_title_edit_text_changed"]
+[connection signal="text_changed" from="TabContainer/Attributes/atrEdit" to="." method="_on_atr_edit_text_changed"]

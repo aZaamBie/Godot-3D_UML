@@ -88,6 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 billboard = 2
 no_depth_test = true
 text = "Title:"
+font_size = 36
+autowrap_mode = 3
 
 [node name="lblAtr" type="Label3D" parent="."]
 billboard = 2
@@ -95,19 +97,20 @@ no_depth_test = true
 text = "- attribute01
 - attribute02
 - attribute03"
+autowrap_mode = 3
 
-[node name="title" type="MeshInstance3D" parent="."]
+[node name="title" type="MeshInstance3D" parent="." groups=["header"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 material_override = SubResource("StandardMaterial3D_jdjq1")
 mesh = SubResource("BoxMesh_f50je")
 skeleton = NodePath("")
 
-[node name="bodyAtr" type="MeshInstance3D" parent="."]
+[node name="bodyAtr" type="MeshInstance3D" parent="." groups=["body"]]
 material_override = SubResource("StandardMaterial3D_tr68t")
 mesh = SubResource("BoxMesh_np01x")
 skeleton = NodePath("")
 
-[node name="bodyMethods" type="MeshInstance3D" parent="."]
+[node name="bodyMethods" type="MeshInstance3D" parent="." groups=["body"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_6yi24")
 mesh = SubResource("BoxMesh_np01x")
@@ -122,7 +125,8 @@ shape = SubResource("ConvexPolygonShape3D_hnhkw")
 
 [node name="detectTitle" type="Area3D" parent="." groups=["editable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726155, -0.100126)
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detectTitle"]
 transform = Transform3D(1.165, 0, 0, 0, 1.165, 0, 0, 0, 1.165, 0, 0, 0)

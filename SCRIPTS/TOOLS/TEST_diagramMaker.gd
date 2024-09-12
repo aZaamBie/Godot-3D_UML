@@ -1,10 +1,12 @@
 extends Node3D
 
 @onready var mousePos = $camPiv/mouseHandle
+@onready var PNL_properties = $UI/pnlProperties
 
 var mode_
 
 var grabbingObject : bool = false
+var inpectingProperties : bool = false
 var selectedObject
 
 var shape_ : int = 0
@@ -32,14 +34,22 @@ func toggleGrab():
 	if !grabbingObject:
 		selectedObject = null
 	
-	grabbingObject = !grabbingObject
-	print("grab toggled, status: " + str(grabbingObject) )
+	grabbingObject = !grabbingObject # change boolean
+	print("grab toggled, status: " + str(grabbingObject) ) #print trace
+func disableGrab():
+	grabbingObject = false
 func grabObject():
 	pass
+
 func setNewObject(newObj):
-	pass
 	selectedObject = newObj
 
+func openPanel_():
+	$UI.openProperties(selectedObject)
+	inpectingProperties = true
+func closePanel_():
+	$UI.closeProperties()
+	inpectingProperties = false
 
 func spawnShape(shp_, pos:Vector3):
 	pass
