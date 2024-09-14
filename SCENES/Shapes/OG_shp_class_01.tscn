@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://i6sxpbufw58r"]
+[gd_scene load_steps=12 format=3 uid="uid://2145grhorvyg"]
 
-[ext_resource type="Script" path="res://SCRIPTS/TOOLS/shp_class_01.gd" id="1_3n3hm"]
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/shp_class_01.gd" id="1_wavwm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdjq1"]
 albedo_color = Color(0.529412, 0.454902, 1, 1)
@@ -59,7 +59,7 @@ _data = {
 }
 
 [node name="shp_Class" type="StaticBody3D" groups=["shpCLASS", "template"]]
-script = ExtResource("1_3n3hm")
+script = ExtResource("1_wavwm")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -82,14 +82,6 @@ offset_bottom = 364.5
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Enter text:"
-
-[node name="Title" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
-[node name="Attribute" type="Node3D" parent="."]
-
-[node name="Methods" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
 
 [node name="lblTitle" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
@@ -114,13 +106,12 @@ mesh = SubResource("BoxMesh_f50je")
 skeleton = NodePath("")
 
 [node name="bodyAtr" type="MeshInstance3D" parent="." groups=["body"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_tr68t")
 mesh = SubResource("BoxMesh_np01x")
 skeleton = NodePath("")
 
 [node name="bodyMethods" type="MeshInstance3D" parent="." groups=["body"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_6yi24")
 mesh = SubResource("BoxMesh_np01x")
 skeleton = NodePath("")

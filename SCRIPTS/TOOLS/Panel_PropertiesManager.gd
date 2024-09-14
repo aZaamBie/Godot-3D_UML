@@ -17,11 +17,11 @@ func _process(delta):
 
 
 func open_(obj_):
-	pass
 	show()
 	if obj_!=null:
 		currentShape_ = obj_
-		$vboxProp/lblColour/ColorPickerButton.color = currentShape_.MAT_body.albedo_color
+		if currentShape_.is_in_group("shpCLASS"):
+			$vboxProp/lblColour/ColorPickerButton.color = currentShape_.MAT_body.albedo_color
 func close_():
 	hide()
 

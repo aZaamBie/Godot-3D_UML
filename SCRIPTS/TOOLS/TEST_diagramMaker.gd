@@ -66,6 +66,10 @@ func spawnShape(shp_, pos:Vector3):
 				pass
 				var class01 = preload("res://SCENES/Shapes/shp_class_01.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 				selectedObject = class01
+			2:
+				pass
+				var actor01 = preload("res://SCENES/Shapes/actor._01tscn.tscn").instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
+				selectedObject = actor01
 			_:
 				pass
 				var rect = preload("res://SCENES/Shapes/shp_rectangle.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
