@@ -65,16 +65,15 @@ func orientScale():
 	
 	for i in get_children():
 		if i is Label3D:
-			#print(i , "is a label 3d")
-			
+			pass
 			## if ownerScale = 1.1, then iScale = 0.9; oScale = 1.2, then iScale = 0.8
 			
 			## 1.0 = (owner + i) /2
 			### iScale = 2 - ownerScale
 			
-			#i.scale = 1.0
-			#i.scale = Vector3(2,2,2) - self.scale
+			i.scale = Vector3(2,2,2) - self.scale
 			
-			tempScale = 2 - self.scale.x
-			#print(tempScale, " is the tempScale of label: ", i)
-		
+			i.scale = clamp(i.scale, Vector3(0.8,0.8,0.8), Vector3(1.2,1.2,1.2)) # clamp, to prevent from scaling out of existence
+
+func hasMaterial():
+	pass

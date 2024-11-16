@@ -42,7 +42,11 @@ func _input(event):
 			
 			## grabbing objects
 			if user_.mode_==0: # ensure correct mode
-				user_.toggleGrab() # toggle the grab state
+				#user_.toggleGrab() # toggle the grab state  ## ORIGINAL
+				
+				if !castRay()["collider"].is_in_group("GRID"):
+					user_.toggleGrab() # toggle the grab state
+				
 				if targetObj!= null: user_.setNewObject(targetObj) # set the object to-be-grabbed for the user
 			## spawning objects
 			elif user_.mode_==1: # spawn shape
@@ -54,6 +58,8 @@ func _input(event):
 			user_.disableGrab() ## MAKE SURE TO DISABLE THE GRAB
 			
 			if targetObj!= null: user_.setNewObject(targetObj)
+			else: return
+			#user_.setNewObject(targetObj)
 			
 			
 			#print(castRay()["collider"] , " is colliding. Will check whether must open panewl")
