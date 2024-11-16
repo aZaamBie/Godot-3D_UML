@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://t6vuyqvyg3nx"]
+[gd_scene load_steps=16 format=3 uid="uid://t6vuyqvyg3nx"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
 [ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
@@ -22,6 +22,9 @@ sky_material = SubResource("ProceduralSkyMaterial_g2b5t")
 background_mode = 2
 sky = SubResource("Sky_54jgf")
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hw3st"]
+data = PackedVector3Array(-25, 25, 0.25, 25, 25, 0.25, -25, -25, 0.25, 25, 25, 0.25, 25, -25, 0.25, -25, -25, 0.25, 25, 25, -0.25, -25, 25, -0.25, 25, -25, -0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, -0.25, 25, 25, 0.25, 25, 25, -0.25, 25, -25, 0.25, 25, 25, -0.25, 25, -25, -0.25, 25, -25, 0.25, -25, 25, -0.25, -25, 25, 0.25, -25, -25, -0.25, -25, 25, 0.25, -25, -25, 0.25, -25, -25, -0.25, 25, 25, 0.25, -25, 25, 0.25, 25, 25, -0.25, -25, 25, 0.25, -25, 25, -0.25, 25, 25, -0.25, -25, -25, 0.25, 25, -25, 0.25, -25, -25, -0.25, 25, -25, 0.25, 25, -25, -0.25, -25, -25, -0.25)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6jht"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.2)
@@ -31,8 +34,7 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_upijq"]
 size = Vector3(50, 50, 0.5)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hw3st"]
-data = PackedVector3Array(-25, 25, 0.25, 25, 25, 0.25, -25, -25, 0.25, 25, 25, 0.25, 25, -25, 0.25, -25, -25, 0.25, 25, 25, -0.25, -25, 25, -0.25, 25, -25, -0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, -0.25, 25, 25, 0.25, 25, 25, -0.25, 25, -25, 0.25, 25, 25, -0.25, 25, -25, -0.25, 25, -25, 0.25, -25, 25, -0.25, -25, 25, 0.25, -25, -25, -0.25, -25, 25, 0.25, -25, -25, 0.25, -25, -25, -0.25, 25, 25, 0.25, -25, 25, 0.25, 25, 25, -0.25, -25, 25, 0.25, -25, 25, -0.25, 25, 25, -0.25, -25, -25, 0.25, 25, -25, 0.25, -25, -25, -0.25, 25, -25, 0.25, 25, -25, -0.25, -25, -25, -0.25)
+[sub_resource type="ButtonGroup" id="ButtonGroup_34x0q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rex76"]
 bg_color = Color(0.207843, 0.207843, 0.207843, 1)
@@ -52,15 +54,17 @@ environment = SubResource("Environment_58y4t")
 
 [node name="OBJ" type="Node3D" parent="."]
 
-[node name="grid" type="MeshInstance3D" parent="."]
+[node name="gridBody" type="StaticBody3D" parent="." groups=["GRID"]]
+collision_mask = 2
+
+[node name="collShape" type="CollisionShape3D" parent="gridBody"]
+shape = SubResource("ConcavePolygonShape3D_hw3st")
+
+[node name="gridMesh" type="MeshInstance3D" parent="gridBody"]
 material_override = SubResource("StandardMaterial3D_v6jht")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_upijq")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="grid"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="grid/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_hw3st")
+skeleton = NodePath("../..")
 
 [node name="camPiv" parent="." node_paths=PackedStringArray("mainCam", "zoomLabel") instance=ExtResource("4_kf2te")]
 mainCam = NodePath("Camera3D")
@@ -88,6 +92,21 @@ grow_horizontal = 2
 
 [node name="pnlSelector" parent="UI" instance=ExtResource("5_gkffh")]
 layout_mode = 1
+
+[node name="btnSelect" parent="UI/pnlSelector/hbox" index="0"]
+button_group = SubResource("ButtonGroup_34x0q")
+
+[node name="OptionButton" parent="UI/pnlSelector/hbox" index="1"]
+button_group = SubResource("ButtonGroup_34x0q")
+
+[node name="btnShape" parent="UI/pnlSelector/hbox" index="2"]
+button_group = SubResource("ButtonGroup_34x0q")
+
+[node name="btnLine" parent="UI/pnlSelector/hbox" index="3"]
+button_group = SubResource("ButtonGroup_34x0q")
+
+[node name="btnText" parent="UI/pnlSelector/hbox" index="4"]
+button_group = SubResource("ButtonGroup_34x0q")
 
 [node name="pnlProperties" parent="UI" instance=ExtResource("6_kwf28")]
 layout_mode = 1

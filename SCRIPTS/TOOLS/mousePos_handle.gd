@@ -16,11 +16,9 @@ var rayCollider
 var toggle : bool = false
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	user_ = get_tree().current_scene
 	cam_ = get_tree().get_root().get_camera_3d()
-	#print(cam_)
 
 func _input(event):
 	pass
@@ -33,7 +31,6 @@ func _input(event):
 		#self.global_transform.origin = screenPos_3D #
 		
 		if !castRay().is_empty():
-			pass
 			mainPos3D = castRay()["position"]
 	
 	## LEFT MOUSE
@@ -42,9 +39,6 @@ func _input(event):
 			var tgtPos
 			tgtPos = mainPos3D
 			tgtPos.z = 0.5
-			#tgtPos = global_position
-			#print(screenPos, " and ", screenPos_3D)
-			#print(tgtPos, " is the target position")
 			
 			## grabbing objects
 			if user_.mode_==0: # ensure correct mode
@@ -61,8 +55,24 @@ func _input(event):
 			
 			if targetObj!= null: user_.setNewObject(targetObj)
 			
-			if user_.inpectingProperties == false: user_.openPanel_()
-			else: user_.closePanel_()
+			
+			#print(castRay()["collider"] , " is colliding. Will check whether must open panewl")
+			
+			## check whether right click on grid (for movement) or on an object (for property modification)
+			if castRay()["collider"].is_in_group("GRID"):
+				pass
+				#print("STATIC BODY AKA GRID")
+			else: 
+				#print("Not static body. So an object")
+				if user_.inpectingProperties == false: user_.openPanel_()
+				else: user_.closePanel_()
+			
+			
+			#if !castRay()["collider"] is StaticBody3D:
+				#pass
+			#
+				#if user_.inpectingProperties == false: user_.openPanel_()
+				#else: user_.closePanel_()
 			
 			print(castRay()["collider"])
 	
@@ -87,7 +97,6 @@ func castRay():
 	
 	var rayQuery = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
 	var rayResult = spaceState.intersect_ray(rayQuery)
-	#print(rayResult)
 	
 	return rayResult
 
@@ -120,8 +129,6 @@ func _on_mouse_area_lmb_body_exited(body):
 		#print("exited object 3D")
 
 ## RMB
-
-
 func _on_mouse_area_rmb_body_entered(body):
 	pass # Replace with function body.
 	if body.is_in_group("editable"):

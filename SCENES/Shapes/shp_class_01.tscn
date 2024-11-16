@@ -59,6 +59,8 @@ _data = {
 }
 
 [node name="shp_Class" type="StaticBody3D" groups=["shpCLASS", "template"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_3n3hm")
 
 [node name="UI" type="Control" parent="."]
@@ -125,11 +127,15 @@ material_override = SubResource("StandardMaterial3D_6yi24")
 mesh = SubResource("BoxMesh_np01x")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="collHead" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("ConvexPolygonShape3D_u2jvl")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="collBody1" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_hnhkw")
+
+[node name="collBody2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("ConvexPolygonShape3D_hnhkw")
 
 [node name="detectTitle" type="Area3D" parent="." groups=["editable"]]

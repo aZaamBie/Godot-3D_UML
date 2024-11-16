@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2jx6lf3rf62q"]
+[gd_scene load_steps=8 format=3 uid="uid://b2jx6lf3rf62q"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/Panel_Selector.gd" id="1_v0mp7"]
 [ext_resource type="Texture2D" uid="uid://cqb4uaxs2ukeb" path="res://ASSETS/icons/icon_Arrange-Move__rotated.png" id="1_v1fq7"]
+[ext_resource type="ButtonGroup" uid="uid://d2g4axdf4e44o" path="res://SCRIPTS/misc/btnGroup_select.tres" id="2_a2v65"]
+[ext_resource type="StyleBox" uid="uid://bmb2h17jyf70u" path="res://ASSETS/theme_Styles/btnGroupSelect_normal.tres" id="2_w73xy"]
+[ext_resource type="StyleBox" uid="uid://df04euucwt1wu" path="res://ASSETS/theme_Styles/btnGroupSelect_hover.tres" id="3_bf6s6"]
+[ext_resource type="StyleBox" uid="uid://c1q23jxldgfo2" path="res://ASSETS/theme_Styles/btnGroupSelect_pressed.tres" id="4_mj5dj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0630k"]
 bg_color = Color(0.184314, 0.184314, 0.184314, 1)
@@ -39,10 +43,19 @@ theme_override_constants/separation = 40
 
 [node name="btnSelect" type="Button" parent="hbox"]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_w73xy")
+theme_override_styles/hover = ExtResource("3_bf6s6")
+theme_override_styles/pressed = ExtResource("4_mj5dj")
+toggle_mode = true
+button_group = ExtResource("2_a2v65")
 icon = ExtResource("1_v1fq7")
 
 [node name="OptionButton" type="OptionButton" parent="hbox"]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_w73xy")
+theme_override_styles/hover = ExtResource("3_bf6s6")
+theme_override_styles/pressed = ExtResource("4_mj5dj")
+button_group = ExtResource("2_a2v65")
 item_count = 3
 allow_reselect = true
 popup/item_0/text = "Rectangle"
@@ -67,15 +80,27 @@ text = "SHAPES:"
 [node name="btnShape" type="Button" parent="hbox"]
 visible = false
 layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_a2v65")
 text = "Shape"
 
-[node name="btnAdd" type="Button" parent="hbox"]
+[node name="btnLine" type="Button" parent="hbox"]
 layout_mode = 2
-text = "LINES"
+theme_override_styles/normal = ExtResource("2_w73xy")
+theme_override_styles/hover = ExtResource("3_bf6s6")
+theme_override_styles/pressed = ExtResource("4_mj5dj")
+toggle_mode = true
+button_group = ExtResource("2_a2v65")
+text = " LINES "
 
-[node name="btnAdd2" type="Button" parent="hbox"]
+[node name="btnText" type="Button" parent="hbox"]
 layout_mode = 2
-text = "TEXT"
+theme_override_styles/normal = ExtResource("2_w73xy")
+theme_override_styles/hover = ExtResource("3_bf6s6")
+theme_override_styles/pressed = ExtResource("4_mj5dj")
+toggle_mode = true
+button_group = ExtResource("2_a2v65")
+text = " TEXT "
 
 [connection signal="pressed" from="hbox/btnSelect" to="." method="_on_btn_select_pressed"]
 [connection signal="item_selected" from="hbox/OptionButton" to="." method="_on_option_button_item_selected"]

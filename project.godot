@@ -16,7 +16,14 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+
+[layer_names]
+
+3d_physics/layer_1="GRID"
+3d_physics/layer_2="OBJECT"
 
 [rendering]
 

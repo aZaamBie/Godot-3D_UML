@@ -67,6 +67,7 @@ func _input(event):
 			if event.relative.y != 0:
 				self.transform.origin += Vector3.UP * event.relative.y * moveSpeed * myDelta
 			else: pass
+			
 
 
 
@@ -80,6 +81,17 @@ func _process(delta):
 	zoomLabel.text = "Zoom: %.2f" % [zoom*100] + "%"
 	
 	self.global_position.z = clamp(mainCam.global_position.z,0.0,2)
+	
+	## Movement on x-y plane:
+	if owner.mode_ == 0:
+		if Input.is_key_pressed(KEY_W):
+			self.transform.origin += Vector3.UP * moveSpeed*20 * myDelta
+		elif Input.is_key_pressed(KEY_S):
+			self.transform.origin += Vector3.DOWN * moveSpeed*20 * myDelta
+		if Input.is_key_pressed(KEY_A):
+			self.transform.origin += Vector3.LEFT * moveSpeed*20 * myDelta
+		elif Input.is_key_pressed(KEY_D):
+			self.transform.origin += Vector3.RIGHT * moveSpeed*20 * myDelta
 
 
 func orbitTarget_select(target_):

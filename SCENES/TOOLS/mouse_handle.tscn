@@ -22,7 +22,7 @@ no_depth_test = true
 text = "."
 
 [node name="mouseAreaLMB" type="Area3D" parent="."]
-collision_mask = 3
+collision_mask = 2
 
 [node name="mouseMesh" type="MeshInstance3D" parent="mouseAreaLMB"]
 visible = false

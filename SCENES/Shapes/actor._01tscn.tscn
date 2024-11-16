@@ -6,6 +6,8 @@
 size = Vector3(0.8, 1.75, 1)
 
 [node name="Actor" type="StaticBody3D" groups=["actorCLASS"]]
+collision_layer = 2
+collision_mask = 3
 
 [node name="model" parent="." instance=ExtResource("1_spcjv")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
