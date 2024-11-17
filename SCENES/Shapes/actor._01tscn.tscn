@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://djbo1yvwgnls5"]
+[gd_scene load_steps=4 format=3 uid="uid://djbo1yvwgnls5"]
 
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/actor_main.gd" id="1_i1oqo"]
 [ext_resource type="PackedScene" uid="uid://dba6vxm1jxxiw" path="res://ASSETS/3D/actors/actor_Simple.glb" id="1_spcjv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p551u"]
@@ -8,6 +9,7 @@ size = Vector3(0.8, 1.75, 1)
 [node name="Actor" type="StaticBody3D" groups=["actorCLASS"]]
 collision_layer = 2
 collision_mask = 3
+script = ExtResource("1_i1oqo")
 
 [node name="model" parent="." instance=ExtResource("1_spcjv")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

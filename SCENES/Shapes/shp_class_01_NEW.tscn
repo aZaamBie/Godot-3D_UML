@@ -77,6 +77,15 @@ text = "- field1
 - field3"
 autowrap_mode = 3
 
+[node name="lblMethod" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+billboard = 2
+no_depth_test = true
+text = "- attribute01
+- attribute02
+- attribute03"
+autowrap_mode = 3
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -152,14 +161,12 @@ autowrap_mode = 3
 
 [node name="divider2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.557894, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_wrxbl")
 mesh = SubResource("BoxMesh_74bx7")
 skeleton = NodePath("../collHead")
 
 [node name="collBody2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-visible = false
 shape = SubResource("ConvexPolygonShape3D_hnhkw")
 
 [node name="bodyMethods" type="MeshInstance3D" parent="collBody2" groups=["body"]]
@@ -169,6 +176,7 @@ mesh = SubResource("BoxMesh_np01x")
 skeleton = NodePath("")
 
 [node name="lblMethod" type="Label3D" parent="collBody2"]
+visible = false
 billboard = 2
 no_depth_test = true
 text = "- attribute01

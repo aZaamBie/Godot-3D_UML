@@ -11,6 +11,7 @@ var selectedObject
 
 var shape_ : int = 0
 var shpRectangle = preload("res://SCENES/Shapes/shp_rectangle.tscn")
+# 
 
 var mousePos3D : Vector3
 
@@ -19,7 +20,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	if grabbingObject and selectedObject!=null:
@@ -62,7 +62,7 @@ func spawnShape(shp_, pos:Vector3):
 				var rect = preload("res://SCENES/Shapes/shp_rectangle.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 				selectedObject = rect
 			1:
-				var class01 = preload("res://SCENES/Shapes/shp_class_01.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+				var class01 = preload("res://SCENES/Shapes/shp_class_01_NEW.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 				selectedObject = class01
 			2:
 				var actor01 = preload("res://SCENES/Shapes/actor._01tscn.tscn").instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
@@ -83,7 +83,6 @@ func spawnShape(shp_, pos:Vector3):
 		## at the end, set the mode to select. This prevents user from spam-spawning elements
 		#mode_ = 0;
 		$UI/pnlSelector.simulatePress("Select")
-		
 
 func updateMode(newMode):
 	mode_ = newMode

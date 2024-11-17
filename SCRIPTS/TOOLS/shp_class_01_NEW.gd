@@ -10,8 +10,8 @@ var methodSize : Vector2 = Vector2(1,1)
 @onready var bodyField = $collBody1/bodyField
 @onready var bodyMethod = $collBody2/bodyMethods
 @onready var lblTitle = $collHead/lblTitle
-@onready var lblField = $collBody1/lblField
-@onready var lblMethods= $collBody2/lblMethod
+@onready var lblField = $lblField  # $collBody1/lblField
+@onready var lblMethods= $lblMethod # $collBody2/lblMethod
 
 func _ready():
 	init_()
@@ -40,19 +40,10 @@ func getMethods():
 ## setters
 func setTitle(newText:String):
 	lblTitle.text = newText
-func setAttr(newText:String):
+func setField(newText:String):
 	lblField.text = newText
 func setMethods(newText:String):
 	lblMethods.text = newText
-
-func _on_detect_title_mouse_entered():
-	pass
-	print("mouse entered")
-	#$UI/LineEdit.show()
-func _on_detect_title_mouse_exited():
-	pass
-	print("mouse left")
-	$UI/LineEdit.hide()
 
 func _on_detect_title_body_entered(body):
 	pass # Replace with function body.
@@ -83,7 +74,7 @@ func orientScale():
 			i.scale = clamp(i.scale, Vector3(0.5,1,1), Vector3(1.2,1.0,1.0)) # clamp, to prevent from scaling out of existence
 			#i.scale = clamp(i.scale, Vector3(0.8,0.8,0.8), Vector3(1.2,1.2,1.2)) # clamp, to prevent from scaling out of existence
 			
-			print(i.scale, " Is the current scale.")
+			print(i.scale, " is the current scale.")
 
 func modifyProperty(type:String, operation : int = 1):
 	## operation parameter should either be +1 (for adding) or -1 (for removing)
@@ -101,8 +92,30 @@ func modifyProperty(type:String, operation : int = 1):
 			# position changes
 			$collBody1.position.y += 0.25 * -operation
 			
+			# change other components
+			$divider2.position.y  += 0.5 * -operation
+			$collBody2.position.y += 0.5 * -operation
+			
+			#if operation >0: # if adding properties, then move methods component down
+				#pass
+				#$collBody2.position.y += 0.5 * -operation
+				##$lblMethod.position = $collBody2.position
+			#else:
+				#pass
+				#$collBody2.position.y += 0.5 * -operation
+				#$lblMethod.position = $collBody2.position
+			
 			$lblField.position = $collBody1.position
+			$lblMethod.position = $collBody2.position
 			
 			
 		"method":
 			pass
+			# scale changes
+			$collBody2.scale.y += 0.5 * operation
+			
+			# position changes
+			#$collBody1.position.y += 0.25 * -operation
+			$collBody2.position.y += 0.25 * -operation
+			
+			$lblMethod.position = $collBody2.position

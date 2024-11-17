@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://diqfdcmax7y4b"]
+[gd_scene load_steps=6 format=3 uid="uid://diqfdcmax7y4b"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/Panel_PropertiesManager.gd" id="1_db64r"]
 
@@ -15,6 +15,10 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6djwh"]
 color = Color(0.0941176, 0, 0.345098, 1)
 thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d08so"]
+color = Color(0.0941176, 0, 0.345098, 1)
+thickness = 2
 
 [node name="pnlProperties" type="Panel"]
 anchors_preset = 6
@@ -118,15 +122,22 @@ offset_bottom = 48.0
 grow_vertical = 0
 
 [node name="txtBtn" type="Button" parent="vboxProp"]
+visible = false
 layout_mode = 2
+disabled = true
 text = "Edit text"
+
+[node name="HSeparator" type="HSeparator" parent="vboxProp"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_d08so")
 
 [node name="componentBTN" type="Button" parent="."]
 layout_mode = 2
 offset_left = 1.0
-offset_top = 240.0
+offset_top = 224.0
 offset_right = 180.0
-offset_bottom = 271.0
+offset_bottom = 255.0
 text = "Edit component"
 
 [node name="TabContainer" type="TabContainer" parent="."]
@@ -180,10 +191,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -169.0
-offset_top = -123.0
+offset_left = -184.0
+offset_top = -142.0
 offset_right = 87.0
-offset_bottom = 75.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -198,28 +209,87 @@ offset_bottom = 39.0
 grow_horizontal = 2
 placeholder_text = "Enter title"
 
-[node name="Attributes" type="TabBar" parent="compnentTab"]
+[node name="Fields" type="TabBar" parent="compnentTab"]
 visible = false
 layout_mode = 2
 
-[node name="atrEdit" type="TextEdit" parent="compnentTab/Attributes"]
+[node name="fieldEdit" type="TextEdit" parent="compnentTab/Fields"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 1.012
+anchor_bottom = 0.563
+offset_right = -0.0720215
+offset_bottom = -0.0210037
 grow_horizontal = 2
 grow_vertical = 2
-placeholder_text = "Enter Attributes:"
+placeholder_text = "Enter Fields:
+- field1: type
+- field2: type"
+
+[node name="btnIncreaseHeight" type="Button" parent="compnentTab/Fields"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -71.0
+offset_right = 133.0
+offset_bottom = -40.0
+grow_vertical = 0
+text = "Increase height"
+
+[node name="btnDecreaseHeight" type="Button" parent="compnentTab/Fields"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -21.0
+offset_right = 41.0
+grow_vertical = 0
+text = "Decrease height"
 
 [node name="Methods" type="TabBar" parent="compnentTab"]
 visible = false
 layout_mode = 2
 
+[node name="methodEdit" type="TextEdit" parent="compnentTab/Methods"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.012
+anchor_bottom = 0.563
+offset_right = -0.0720215
+offset_bottom = -0.0210037
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter methods:
++ method1(type): type
++ method2(type): type"
+
+[node name="btnIncreaseHeight" type="Button" parent="compnentTab/Methods"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -71.0
+offset_right = 133.0
+offset_bottom = -40.0
+grow_vertical = 0
+text = "Increase height"
+
+[node name="btnDecreaseHeight" type="Button" parent="compnentTab/Methods"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -21.0
+offset_right = 41.0
+grow_vertical = 0
+text = "Decrease height"
+
 [connection signal="value_changed" from="vboxProp/lblScale/slid_x" to="." method="_on_slid_x_value_changed"]
 [connection signal="value_changed" from="vboxProp/lblScale/slid_y" to="." method="_on_slid_y_value_changed"]
 [connection signal="color_changed" from="vboxProp/lblColour/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="mouse_entered" from="vboxProp/txtBtn" to="." method="_on_txt_btn_mouse_entered"]
-[connection signal="mouse_entered" from="componentBTN" to="." method="_on_txt_btn_mouse_entered"]
+[connection signal="pressed" from="componentBTN" to="." method="_on_component_btn_pressed"]
 [connection signal="mouse_exited" from="TabContainer" to="." method="_on_tab_container_mouse_exited"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="text_changed" from="TabContainer/Title/titleEdit" to="." method="_on_title_edit_text_changed"]
@@ -227,4 +297,5 @@ layout_mode = 2
 [connection signal="mouse_exited" from="compnentTab" to="." method="_on_tab_container_mouse_exited"]
 [connection signal="tab_changed" from="compnentTab" to="." method="_on_tab_container_tab_changed"]
 [connection signal="text_changed" from="compnentTab/Title/titleEdit" to="." method="_on_title_edit_text_changed"]
-[connection signal="text_changed" from="compnentTab/Attributes/atrEdit" to="." method="_on_atr_edit_text_changed"]
+[connection signal="text_changed" from="compnentTab/Fields/fieldEdit" to="." method="_on_atr_edit_text_changed"]
+[connection signal="text_changed" from="compnentTab/Methods/methodEdit" to="." method="_on_atr_edit_text_changed"]
