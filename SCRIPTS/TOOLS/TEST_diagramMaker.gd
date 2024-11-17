@@ -93,4 +93,4 @@ func addToGroup(object, Group_:String):
 
 func clearScene():
 	for object in get_tree().get_nodes_in_group("object3D"):
-		object.queue_free
+		object.queue_free()

@@ -39,12 +39,20 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_g58dy")
-text = "FILE"
+text = "File"
+item_count = 4
+popup/item_0/text = "New"
+popup/item_0/id = 0
+popup/item_1/text = "Save"
+popup/item_1/id = 1
+popup/item_2/text = "Close"
+popup/item_2/id = 2
+popup/item_3/text = "File"
+popup/item_3/id = 3
+popup/item_3/disabled = true
 
 [node name="mbtnEdit" type="MenuButton" parent="hbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_g58dy")
-text = "EDIT"
-
-[connection signal="pressed" from="hbox/mbtnFile" to="." method="_on_btn_file_pressed"]
+text = "Edit"

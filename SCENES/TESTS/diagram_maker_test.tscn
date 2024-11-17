@@ -47,7 +47,7 @@ expand_margin_left = 5.0
 shadow_size = 5
 shadow_offset = Vector2(3.075, -2.135)
 
-[node name="diagramMaker_TEST" type="Node3D"]
+[node name="diagramMaker_TEST" type="Node3D" groups=["OWNER"]]
 script = ExtResource("1_g3o73")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
