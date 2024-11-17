@@ -21,10 +21,10 @@ func _process(delta):
 	pass
 	if Engine.get_process_frames() % 30 == 0: # checks whether x # of frames have passed since last comparison
 		pass
-		orientScale()
+		#orientScale()
 		# run the logic once every x frames. If 60 frame = 1 sec, then 30 frame = 0.5 sec, 20frame=0.3 sec and so on...
 		#print("Checking idle frames")
-	#Engine.get_process_frames()
+
 
 ## getters
 func getTitle():
@@ -56,12 +56,15 @@ func _on_detect_title_body_entered(body):
 		pass
 		print("mouse entered title editor")
 
+func setScale(plane:String, amount:float):
+	match plane:
+		"X": self.scale.x = amount
+		"Y": self.scale.y = amount
+	orientScale()
 
 ## misc
 var tempScale = 1.0
 func orientScale():
-	pass
-	#var tempScale = 1.0
 	
 	for i in get_children():
 		if i is Label3D:
@@ -74,6 +77,8 @@ func orientScale():
 			i.scale = Vector3(2,2,2) - self.scale
 			
 			i.scale = clamp(i.scale, Vector3(0.8,0.8,0.8), Vector3(1.2,1.2,1.2)) # clamp, to prevent from scaling out of existence
+			
+			print(i.scale, " Is the current scale.")
 
 func hasMaterial():
 	pass

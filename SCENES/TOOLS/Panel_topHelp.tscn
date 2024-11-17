@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cto17pii643kc"]
+
+[ext_resource type="Script" path="res://SCRIPTS/TOOLS/Panel_topHelp.gd" id="1_j03nl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g58dy"]
+bg_color = Color(0.337255, 0.337255, 0.337255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.466667, 0.466667, 0.466667, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 1
+shadow_offset = Vector2(1.305, -2.705)
+
+[node name="pnl_top" type="Panel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+script = ExtResource("1_j03nl")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = -161.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_constants/separation = 30
+
+[node name="mbtnFile" type="MenuButton" parent="hbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_g58dy")
+text = "FILE"
+
+[node name="mbtnEdit" type="MenuButton" parent="hbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_g58dy")
+text = "EDIT"
+
+[connection signal="pressed" from="hbox/mbtnFile" to="." method="_on_btn_file_pressed"]

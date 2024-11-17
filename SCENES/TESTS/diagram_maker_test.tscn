@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://t6vuyqvyg3nx"]
+[gd_scene load_steps=17 format=3 uid="uid://t6vuyqvyg3nx"]
 
 [ext_resource type="Script" path="res://SCRIPTS/TOOLS/TEST_diagramMaker.gd" id="1_g3o73"]
 [ext_resource type="Texture2D" uid="uid://csbei61uavaet" path="res://icon.svg" id="1_wkur2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b2jx6lf3rf62q" path="res://SCENES/TOOLS/Panel_Selector.tscn" id="5_gkffh"]
 [ext_resource type="Script" path="res://SCRIPTS/UI/UI_manager.gd" id="5_kr62m"]
 [ext_resource type="PackedScene" uid="uid://diqfdcmax7y4b" path="res://SCRIPTS/TOOLS/Panel_PropertiesManager.tscn" id="6_kwf28"]
+[ext_resource type="PackedScene" uid="uid://cto17pii643kc" path="res://SCENES/TOOLS/Panel_topHelp.tscn" id="6_q3ggn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g2b5t"]
 sky_top_color = Color(0.721569, 0.815686, 0.92549, 1)
@@ -82,13 +83,9 @@ grow_vertical = 2
 script = ExtResource("5_kr62m")
 properties_ = NodePath("pnlProperties")
 
-[node name="pnl_top" type="Panel" parent="UI"]
-visible = false
+[node name="pnl_top" parent="UI" instance=ExtResource("6_q3ggn")]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 56.0
-grow_horizontal = 2
+offset_bottom = 54.0
 
 [node name="pnlSelector" parent="UI" instance=ExtResource("5_gkffh")]
 layout_mode = 1
@@ -143,5 +140,6 @@ text = "WORK IN PROGRESS"
 horizontal_alignment = 2
 
 [editable path="camPiv"]
+[editable path="UI/pnl_top"]
 [editable path="UI/pnlSelector"]
 [editable path="UI/pnlProperties"]

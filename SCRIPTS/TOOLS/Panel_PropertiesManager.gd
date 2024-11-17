@@ -29,13 +29,20 @@ func close_():
 func _on_slid_x_value_changed(value):
 	custom_scale.x = value
 	
-	currentShape_.scale.x = value
+	if currentShape_.has_method("setScale"):
+		currentShape_.setScale("X", value) # NEW
+	else:
+		currentShape_.scale.x = value  # OLD
 
 
 func _on_slid_y_value_changed(value):
 	custom_scale.y = value
 	
-	currentShape_.scale.y = value
+	if currentShape_.has_method("setScale"):
+		currentShape_.setScale("Y", value) # NEW
+	else:
+		currentShape_.scale.y = value     # OLD
+		
 
 
 func _on_color_picker_button_color_changed(color):
@@ -52,7 +59,6 @@ func _on_title_edit_text_changed():
 
 
 func _on_atr_edit_text_changed():
-	pass # Replace with function body.
 	if currentShape_!=null:
 		currentShape_.setAttr($TabContainer/Attributes/atrEdit.text)
 
