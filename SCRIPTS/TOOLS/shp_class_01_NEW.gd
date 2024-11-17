@@ -4,42 +4,46 @@ var color_
 var MAT_body
 var MAT_title
 
+var atrSize : Vector2 = Vector2(1,1)
+var methodSize : Vector2 = Vector2(1,1)
+
+@onready var bodyField = $collBody1/bodyField
+@onready var bodyMethod = $collBody2/bodyMethods
+@onready var lblTitle = $collHead/lblTitle
+@onready var lblField = $collBody1/lblField
+@onready var lblMethods= $collBody2/lblMethod
 
 func _ready():
-	pass # Replace with function body.
 	init_()
-	#orientScale()
 
 func init_():
 	MAT_body = StandardMaterial3D.new() # create new material
 	MAT_body.albedo_color = Color.WHITE_SMOKE # assign color
 	color_ = MAT_body.albedo_color # assign color above to variable
-	#mesh_.material_override = MAT_
-	$bodyAtr.material_override = MAT_body
+	
+	bodyField.material_override = MAT_body
 
 func _process(delta):
 	pass
-	if Engine.get_process_frames() % 30 == 0: # checks whether x # of frames have passed since last comparison
-		pass
-		#orientScale()
-		# run the logic once every x frames. If 60 frame = 1 sec, then 30 frame = 0.5 sec, 20frame=0.3 sec and so on...
-		#print("Checking idle frames")
+	#if Engine.get_process_frames() % 30 == 0: # checks whether x # of frames have passed since last comparison
+		#pass
 
 
 ## getters
 func getTitle():
-	return $lblTitle.text
+	return lblTitle.text
 func getAttribute():
-	return $lblAtr.text
+	return lblField.text
 func getMethods():
-	pass
+	return lblMethods.text
 
 ## setters
 func setTitle(newText:String):
-	$lblTitle.text = newText
+	lblTitle.text = newText
 func setAttr(newText:String):
-	$lblAtr.text = newText
-	
+	lblField.text = newText
+func setMethods(newText:String):
+	lblMethods.text = newText
 
 func _on_detect_title_mouse_entered():
 	pass
@@ -81,5 +85,24 @@ func orientScale():
 			
 			print(i.scale, " Is the current scale.")
 
-func hasMaterial():
-	pass
+func modifyProperty(type:String, operation : int = 1):
+	## operation parameter should either be +1 (for adding) or -1 (for removing)
+	
+	## ratio of 6:1
+	# scale = 1.5, then pos = -0.25 ||| scale = 0.5, then pos = 0.25;
+	
+	match type:
+		"field":
+			pass
+			# scale changes
+			#$collBody1.scale.x += 0.5 * operation
+			$collBody1.scale.y += 0.5 * operation
+			
+			# position changes
+			$collBody1.position.y += 0.25 * -operation
+			
+			$lblField.position = $collBody1.position
+			
+			
+		"method":
+			pass

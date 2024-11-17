@@ -23,8 +23,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -180.0
-offset_top = -160.0
-offset_bottom = 160.0
+offset_top = -200.0
+offset_bottom = 200.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eromc")
@@ -40,13 +40,25 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_bbwx6")
 text = "Properties:"
 horizontal_alignment = 1
 
+[node name="lblObject" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 46.0
+grow_horizontal = 2
+text = "Object:"
+
 [node name="vboxProp" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00555549
-anchor_top = 0.1
+anchor_top = 0.1325
 anchor_right = 1.0
-anchor_bottom = 0.765625
+anchor_bottom = 0.785
 offset_left = 1.15633e-05
 offset_right = 1.52588e-05
 grow_horizontal = 2
@@ -109,6 +121,14 @@ grow_vertical = 0
 layout_mode = 2
 text = "Edit text"
 
+[node name="componentBTN" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 240.0
+offset_right = 180.0
+offset_bottom = 271.0
+text = "Edit component"
+
 [node name="TabContainer" type="TabContainer" parent="."]
 visible = false
 layout_mode = 1
@@ -153,11 +173,58 @@ placeholder_text = "Enter Attributes:"
 visible = false
 layout_mode = 2
 
+[node name="compnentTab" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -123.0
+offset_right = 87.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Title" type="TabBar" parent="compnentTab"]
+layout_mode = 2
+
+[node name="titleEdit" type="TextEdit" parent="compnentTab/Title"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+placeholder_text = "Enter title"
+
+[node name="Attributes" type="TabBar" parent="compnentTab"]
+visible = false
+layout_mode = 2
+
+[node name="atrEdit" type="TextEdit" parent="compnentTab/Attributes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter Attributes:"
+
+[node name="Methods" type="TabBar" parent="compnentTab"]
+visible = false
+layout_mode = 2
+
 [connection signal="value_changed" from="vboxProp/lblScale/slid_x" to="." method="_on_slid_x_value_changed"]
 [connection signal="value_changed" from="vboxProp/lblScale/slid_y" to="." method="_on_slid_y_value_changed"]
 [connection signal="color_changed" from="vboxProp/lblColour/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="mouse_entered" from="vboxProp/txtBtn" to="." method="_on_txt_btn_mouse_entered"]
+[connection signal="mouse_entered" from="componentBTN" to="." method="_on_txt_btn_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer" to="." method="_on_tab_container_mouse_exited"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="text_changed" from="TabContainer/Title/titleEdit" to="." method="_on_title_edit_text_changed"]
 [connection signal="text_changed" from="TabContainer/Attributes/atrEdit" to="." method="_on_atr_edit_text_changed"]
+[connection signal="mouse_exited" from="compnentTab" to="." method="_on_tab_container_mouse_exited"]
+[connection signal="tab_changed" from="compnentTab" to="." method="_on_tab_container_tab_changed"]
+[connection signal="text_changed" from="compnentTab/Title/titleEdit" to="." method="_on_title_edit_text_changed"]
+[connection signal="text_changed" from="compnentTab/Attributes/atrEdit" to="." method="_on_atr_edit_text_changed"]
